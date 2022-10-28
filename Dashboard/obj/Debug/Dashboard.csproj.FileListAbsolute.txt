@@ -1,0 +1,8 @@
+D:\Source Code\Dashboard\Dashboard\bin\Debug\Dashboard.exe.config
+D:\Source Code\Dashboard\Dashboard\bin\Debug\Dashboard.exe
+D:\Source Code\Dashboard\Dashboard\bin\Debug\Dashboard.pdb
+D:\Source Code\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.AssemblyReference.cache
+D:\Source Code\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CoreCompileInputs.cache
+D:\Source Code\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.CopyComplete
+D:\Source Code\Dashboard\Dashboard\obj\Debug\Dashboard.exe
+D:\Source Code\Dashboard\Dashboard\obj\Debug\Dashboard.pdb

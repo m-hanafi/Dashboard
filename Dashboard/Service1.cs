@@ -3,9 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.ServiceModel;
@@ -15,9 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Web;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Configuration;
 using Rockey4NDControl;
 
 namespace Dashboard
@@ -33,9 +29,9 @@ namespace Dashboard
         static string IPAddress;
         SqlConnection con;
         static String LINES = "0";
-        static String PMSCLIENT = "0";
-        static String PMSSERVER = "0";
-        static String PMSTABLET = "0";
+        static String CLIENT = "0";
+        static String SERVER = "0";
+        static String TABLET = "0";
 
         System.Timers.Timer dongletimer = new System.Timers.Timer();
 
@@ -92,9 +88,9 @@ namespace Dashboard
                 Dongle();    //chekc for the dongle
 
                 //check if pms server is enabled for the dongle
-                if (PMSSERVER == "0")
+                if (SERVER == "0")
                 {
-                  WriteToExFile("PMS SERVER not Enabled for this Key");
+                  WriteToExFile("SERVER not Enabled for this Key");
                   this.Stop();
                 }
 
@@ -357,7 +353,7 @@ namespace Dashboard
                 //read 
                 for (int i = 0; i < 6; i++)
                 {
-                    //////////////////////////////////////Number of Lines////////////////////////////////////////
+                    //Number of Lines
                     p1 = 1;
                     p2 = 1;
                     buffer[0] = 0;
@@ -380,7 +376,7 @@ namespace Dashboard
                     }
                 }
 
-                ////////////////////////////////////Products Enabled////////////////////////////////////////
+                //Products Enabled
                 for (int i = 0; i < 6; i++)
                 {
                     p1 = 6;
@@ -391,7 +387,7 @@ namespace Dashboard
                     {
                         uiarrRy4ID[iMaxRockey] = lp1;
                         iMaxRockey++;
-                        PMSCLIENT = buffer[0].ToString();
+                        CLIENT = buffer[0].ToString();
                         break;
                     }
                     else
@@ -405,7 +401,7 @@ namespace Dashboard
                     }
                 }
 
-                ////////////////////////////////////Products Enabled////////////////////////////////////////
+                //Products Enabled
                 for (int i = 0; i < 6; i++)
                 {
                     p1 = 7;
@@ -419,7 +415,7 @@ namespace Dashboard
 
                         if (buffer[0].ToString() == "1")
                         {
-                            PMSSERVER = "1";
+                            SERVER = "1";
                         }
                         break;
                     }
@@ -434,7 +430,7 @@ namespace Dashboard
                     }
                 }
 
-                ////////////////////////////////////Products Enabled////////////////////////////////////////
+                //Products Enabled
                 for (int i = 0; i < 6; i++)
                 {
                     p1 = 8;
@@ -448,7 +444,7 @@ namespace Dashboard
 
                         if (buffer[0].ToString() == "1")
                         {
-                            PMSTABLET = "1";
+                            TABLET = "1";
                         }
                         break;
                     }
@@ -466,7 +462,7 @@ namespace Dashboard
 
                 for (int i = 0; i < 6; i++)
                 {
-                    ////////////////////////////////////TRIAL VERSION////////////////////////////////////////
+                    //TRIAL VERSION
                     p1 = 3;
                     p2 = 3;
                     buffer[0] = 0;
@@ -669,8 +665,8 @@ namespace Dashboard
     {
         //file locations
         String IPAddress;
-        String DASHBOARD1 = "C:\\Program Files (x86)\\SmartMRT\\SmartMRT Dashboard\\HTML\\DASHBOARD1.txt";
-        String DASHBOARD2 = "C:\\Program Files (x86)\\SmartMRT\\SmartMRT Dashboard\\HTML\\DASHBOARD2.txt";
+        String DASHBOARD1 = "C:\\Program Files (x86)\\Dashboard\\HTML\\DASHBOARD1.txt";
+        String DASHBOARD2 = "C:\\Program Files (x86)\\Dashboard\\HTML\\DASHBOARD2.txt";
 
         Service1 sc = new Service1();
 
@@ -711,11 +707,9 @@ namespace Dashboard
 
         //generate logs
         public void WriteToExFile(string Message)
-        {
-           
+        {          
             try
             {
-                //string path = "C:\\SMARTMRT\\SmartMRT Loading\\" + DateTime.Now.ToString("MMMM yyyy");
                 string path = Application.StartupPath + "\\DebugLog\\" + DateTime.Now.ToString("yyyyMMdd");
 
                 if (!Directory.Exists(path))
@@ -748,10 +742,6 @@ namespace Dashboard
 
         public Stream HOME()
         {
-
-            ////check if tablet service is enabled
-            //if (sc.GET_PMSTABLET().Contains("1"))
-            //{
             String text1 = "";
 
             try
@@ -763,8 +753,7 @@ namespace Dashboard
                 }
 
                 //open connection
-                SqlConnection con2 = new SqlConnection("Data Source=127.0.0.1,1433;Network Library=DBMSSOCN;Initial Catalog=ONLINE_LOCALDB;User ID=sa;Password=1234;Connection Timeout=5");
-                //SqlConnection con2 = new SqlConnection("Data Source=192.168.0.136,1433;Network Library=DBMSSOCN;Initial Catalog=ONLINE_LOCALDB;User ID=sa;Password=1234;Connection Timeout=5");
+                SqlConnection con2 = new SqlConnection("Data Source=127.0.0.1,1433;Network Library=DBMSSOCN;Initial Catalog=ONLINE_LOCALDB;User ID=sa;Password=1234;Connection Timeout=5"); 
                 con2.Open();
 
                 String strSql = "select PRODLINE from SETUP";
@@ -776,7 +765,7 @@ namespace Dashboard
                 String[] color = { "#990000", "#669900", "#000099", "#009999", "#999900", "#269900", "#990073", "#997300", "#00994d", "#4d0099", "#990000", "#994d00", "#004d99", "#992600", "#99004d", "#009973", "#990099", "#739900", "#990026", "#007399", "#4d9900", "#730099", "#009900", "#002699", "#009926", "#260099 " };
                 String date = DateTime.Now.ToString("yyyy-MM-dd");
 
-                text1 = text1 + "Highcharts.chart('container', {chart: {backgroundColor: '#201F1F'},title:{text: 'Hourly Production Report : Line - " + strLineNo + "',style: {color: '#efefef'}},subtitle:{text: 'SmartMRT ',style: {color: '#efefef'}},yAxis:{title: {text: 'Piece Count',style: {color: '#efefef'}}}, legend:{layout: 'horizontal', align: 'center',verticalAlign: 'bottom',itemStyle: {font: '10pt Trebuchet MS, Verdana, sans-serif',color: 'white'},},plotOptions:{line: {dataLabels:{enabled: true,color: 'white',format: '{y} Pcs',inside: false,style: {fontWeight: 'bold'},}},series: { animation: false, label:{connectorAllowed: false }}},series: [";
+                text1 = text1 + "Highcharts.chart('container', {chart: {backgroundColor: '#201F1F'},title:{text: 'Hourly Production Report : Line - " + strLineNo + "',style: {color: '#efefef'}},subtitle:{text: 'Dashboard ',style: {color: '#efefef'}},yAxis:{title: {text: 'Piece Count',style: {color: '#efefef'}}}, legend:{layout: 'horizontal', align: 'center',verticalAlign: 'bottom',itemStyle: {font: '10pt Trebuchet MS, Verdana, sans-serif',color: 'white'},},plotOptions:{line: {dataLabels:{enabled: true,color: 'white',format: '{y} Pcs',inside: false,style: {fontWeight: 'bold'},}},series: { animation: false, label:{connectorAllowed: false }}},series: [";
 
                 int hourlyflag = 0;
 
@@ -816,7 +805,6 @@ namespace Dashboard
 "WHERE HANGERLOGIN>= '" + date + " 00:00:00' and HANGERLOGIN<'" + date + " 23:59:59'  and PRODUCTIONLINE = '" + strLineNo + "' " +
 "AND MONO = '" + mo + "' and OPCODE = '" + strloadOpCode + "'  ";
 
-                    // WriteToExFile("strSql - " + strSql);
                     SqlCommand cmd1 = new SqlCommand(strSql, con2);
                     String temp1 = cmd1.ExecuteScalar() + "";
                     if (temp1 != "")
@@ -825,12 +813,10 @@ namespace Dashboard
                         totalload += count;
                     }
 
-
                     //get unloading opcode
                     strSql = "select top 1 OPCODE from STATIONASSIGN where PRODID = '" + strProdId + "' order by SEQNO desc";
                     SqlCommand cmd4 = new SqlCommand(strSql, con2);
                     String strUnloadOpCode = cmd4.ExecuteScalar() + "";
-
 
                     strSql = "SELECT DATEPART(HOUR, HANGERLOGIN) as Hour, SUM(PPH) as Pc_Count FROM HANGERRECORD " +
 "WHERE HANGERLOGIN>= '" + date + " 00:00:00' and HANGERLOGIN<'" + date + " 23:59:59'  and PRODUCTIONLINE = '" + strLineNo + "' " +
@@ -898,7 +884,6 @@ namespace Dashboard
                 for (int i = 0; i < dt3.Rows.Count; i++)
                 {
                     String mo = dt3.Rows[i][0].ToString();
-                    // String moline = dt3.Rows[i][1].ToString();
                     int count = 0;
 
                     String temp2 = dt3.Rows[i][1].ToString();
@@ -912,7 +897,6 @@ namespace Dashboard
                     }
 
                     totalqc += count;
-                    //text1 += "\n{ name: '" + mo + "-" + moline + "', y: " + count + "},\n";
                     text1 += "\n{ name: '" + mo + "', y: " + count + "},\n";
 
                     qcflag = 1;
@@ -952,21 +936,13 @@ namespace Dashboard
                 }
 
                 text1 += "]});";
-
                 text1 += "Highcharts.chart('container4', {chart: {type: 'column',backgroundColor: '#201F1F'}, title: { text: 'Station : Line - " + strLineNo + "',style: {color: '#efefef'}},legend: {itemStyle: {fontSize:'10px',font: '11pt Trebuchet MS, Verdana, sans-serif', color: 'white'}, itemHoverStyle: {color: '#FFF'}, itemHiddenStyle: { color: '#444' } },xAxis: {categories: ['Line : " + strLineNo + "'],crosshair: true},plotOptions: {series: {animation: false},column: {dataLabels: {enabled: true,crop: false,overflow: 'none',color: 'white'} }},credits: { enabled: false}, series: []});";
-
                 text1 += "</script> ";
-
-                
-
-                // WriteToExFile("unload000 - " + totalunload.ToString() + ",load000 - " + totalload.ToString() + ", qc000 - " + totalqc.ToString());
-
                 text1 = text1.Replace("unload000", totalunload.ToString());
                 text1 = text1.Replace("load000", totalload.ToString());
                 text1 = text1.Replace("qc000", totalqc.ToString());
                 text1 = text1.Replace("strLineNo", strLineNo);
                 text1 = text1 + "<label id=\"local\" for=\"Remote\" hidden>" + GetIPAddress() + "</label>";
-                // text1 = text1 + "<label id=\"remote\" for=\"Remote\" hidden>" + ipaddress + "</label>";
                 text1 += "</body>";
             }
             catch (Exception ex)
@@ -981,14 +957,7 @@ namespace Dashboard
             WebOperationContext.Current.OutgoingResponse.ContentType = "text/html";
 
             return new MemoryStream(resultBytes);
-            //}
-            //else
-            //{
-            //    byte[] resultBytes = Encoding.UTF8.GetBytes("<h2>Tablet Services Not Enabled for this Key</h2>");
-            //    WebOperationContext.Current.OutgoingResponse.ContentType = "text/html";
-
-            //    return new MemoryStream(resultBytes);
-            //}
+          
         }
 
         public Stream FetchImage(String imageName)
@@ -996,7 +965,7 @@ namespace Dashboard
             try
             {
                 //get images from file
-                String filePath = @"C:\\Program Files (x86)\\SmartMRT\\Loading\\Images\\" + imageName;
+                String filePath = @"C:\\Program Files (x86)\\Dashboard\\Loading\\Images\\" + imageName;
                 if (File.Exists(filePath))
                 {
                     FileStream fs = File.OpenRead(filePath);
@@ -1031,7 +1000,7 @@ namespace Dashboard
             try
             {
                 //get files from folder
-                String fileName = @"C:\\Program Files (x86)\\SmartMRT\\SmartMRT Dashboard\\Loading\\" + file;
+                String fileName = @"C:\\Program Files (x86)\\Dashboard\\Loading\\" + file;
                 if (File.Exists(fileName))
                 {
                     //WebOperationContext.Current.OutgoingResponse.ContentType = "application/octet-stream";

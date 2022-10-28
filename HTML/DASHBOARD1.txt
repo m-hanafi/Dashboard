@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+	<html>
+		<head>  		
+			<meta http-equiv="refresh" content="10">
+			<style>
+			.backimage
+				{	
+					background-image: url("http://255.255.255.255:8091/file/smartmrtdashboard.png");
+					height: 60px;
+					width: 600px;
+					background-size: 100% 100%;
+					background-repeat: no-repeat;
+				}
+			
+				#parent_div_1
+				{
+					width:100%;
+					height:60px;
+					float:left;
+					background-color:Black
+				}
+				
+				.child_div_1
+				{
+					float:left;
+				}
+				
+				.button5 
+				{
+					background-color: #555555;
+				} 
+
+				.button5:hover 
+				{
+					background-color: #A7A7A7;
+				}
+			
+				#bottom 
+				{ 
+					position:absolute;                  
+					top:5;                          
+					right:0;                          
+				}
+				.button 
+				{
+					border: none;
+					color: white;
+					padding: 5px 1px;
+					text-align: center;
+					text-decoration: none;
+					margin: 4px 2px;
+					cursor: pointer;
+				}
+			
+</style>		
+<script src="http://255.255.255.255:8091/files/highcharts.js"></script>
+<link rel="stylesheet" href="http://255.255.255.255:8091/files/bootstrap.min.css">
+		<script src="http://255.255.255.255:8091/files/jquery.min.js"></script>
+		<script src="http://255.255.255.255:8091/files/bootstrap.min.js"></script>
+</head>
+<body style="background-color:#201F1F;">
+<div id='parent_div_1'>
+		<div class ='child_div_1'>
+			<div style="float:left;" class="backimage"></div>
+		</div>
+</div>
+	
+		<button class="button button5" id="bottom" onclick="home()" style="width:150px">HOME</button>
+		
+	<div style="width:100%; height:30px; top:60px; position:absolute;text-align: center;font-size:large;">
+			<label style="color:white;padding-left:55px;padding-right:5px;">Total Loaded : </label><label style="color:white">load000</label>
+			<label style="color:white;padding-left:55px;padding-right:5px;">Total Production : </label><label style="color:white">unload000</label>
+			<label style="color:white;padding-left:55px;padding-right:5px;">Total Repair/Rework :</label><label style="color:white">qc000</label>
+	</div>	
+	
+	<div style="width:100%; height:37.5%; position:absolute; top:90px">
+			 <div id="container" style="height: 100%; width:60%;"></div>
+	</div>	
+	<div style="width:100%; margin-left:60%; height:37.5%; position:absolute; top:90px">
+			<div id="container1" style="height: 100%; width:40%"></div>
+	</div>	
+	<div style="width:100%; height:47.5%; top:50%; position:absolute;">
+			<div id="container2" style="height: 100%; width:50%;"></div>
+	</div>
+	</div>
+	<div style="width:100%; margin-left:50%; height:47.5%; top:50%; position:absolute;">
+			<div id="container3" style="height: 100%; width:50%"></div>
+	</div>
+	
+ <script>
+ function home()
+			{
+				var localip=document.getElementById('local').textContent;
+				var link="http://"+localip+":8091/HOME";
+				window.location = link;
+			}

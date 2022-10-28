@@ -5,7 +5,7 @@
 			<style>
 			.backimage
 				{	
-					background-image: url("http://255.255.255.255:8091/file/smartmrtdashboard.png");
+					background-image: url("http://255.255.255.255:8091/file/dashboard.png");
 					height: 60px;
 					width: 600px;
 					background-size: 100% 100%;

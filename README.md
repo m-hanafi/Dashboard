@@ -32,16 +32,15 @@
 
 ### DASHBOARD
 
-This dashboard is developed to visualize real-time data in charts
+![alt text](https://github.com/m-hanafi/Dashboard/blob/main/Images/dashboard_1.png?raw=true)
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+This dashboard is developed to visualize data on a browser. The visualization is real-time and browser will refresh automatically in interval period.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+Data included:
+* Total piece loaded.
+* Total piece completed.
+* Total QC count.
+* Station piece count.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -51,14 +50,7 @@ Use the `BLANK_README.md` to get started.
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* C#
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
